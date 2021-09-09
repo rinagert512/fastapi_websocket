@@ -15,11 +15,11 @@ async def get():
 async def websocket_send_endpoint(websocket: WebSocket):
     await websocket.accept()
 
-    messages = []
+    ctr = 0
     while True:
         text = await websocket.receive_text()
-        messages.append(text)
+        ctr += 1
         await websocket.send_json([{
-            'id': len(messages),
+            'id': ctr,
             'text': text
         }])
